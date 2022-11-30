@@ -2,12 +2,22 @@ import java.util.*;
 public class Edge{
     private int weight;
     private boolean included = false;
+    private int source;
     private int dest;
 
-    public Edge(int weight, int dest){
-        this.weight = weight;
+    public Edge(int source, int dest, int weight){
+        this.source = source;
         this.dest = dest;
+        this.weight = weight;
         this.included = false;
+    }
+
+    public int getSource() {
+        return source;
+    }
+
+    public void setSource(int source) {
+        this.source = source;
     }
 
     public int getWeight() {
