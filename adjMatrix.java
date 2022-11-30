@@ -107,5 +107,6 @@ class adjMatrix{
 		adjMatrix b = new adjMatrix(graph);
 		System.out.println(b);
 		b.primsMST(fOutput);
+		fOutput.close();
 	}
 };
