@@ -1,3 +1,6 @@
+import java.io.FileWriter;
+import java.io.IOException;
+
 class adjMatrix{
 	private int matrix[][]; //matrix rep of graph
 	private int numV; //number of vertices in the graph
@@ -53,12 +56,13 @@ class adjMatrix{
 	 * void primsMST
 	 * creates a minimum spanning tree from this graph and prints it to console
 	 */
-	public void primsMST() {
+	public void primsMST(FileWriter w) throws IOException {
 		int numE = 0; 							//count number of edges
 		boolean selected[] = new boolean[numV];	//keep track of selected vertices
 		selected[0] = true; 					//arbitrarily select first vertex
 		
-		System.out.println("----------\nEdge : Weight");
+		w.write("Prim's Algorithm using adjacency matrix representation:\n");
+		w.write("Edge : Weight\n");
 		
 		while(numE < numV-1) {
 			int min = Integer.MAX_VALUE;
@@ -77,15 +81,16 @@ class adjMatrix{
 					}
 				}
 			}
-			System.out.println(r + " - " + c + " : " + matrix[r][c]);
+			w.write(r + " - " + c + " : " + matrix[r][c] + "\n");
 			selected[c] = true;	//update selected to include vertex c
 			numE++;
 		}
-		System.out.println("----------");
+		w.write("\n");
 	}
 	
 	//examples for creating a graph and running prims
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
+		FileWriter fOutput = new FileWriter("output.txt");
 		adjMatrix a = new adjMatrix(6);
 		a.addEdge(0, 1, 4);
 		a.addEdge(0, 2, 4);
@@ -96,11 +101,11 @@ class adjMatrix{
 		a.addEdge(3, 5, 3);
 		a.addEdge(4, 5, 3);
 		System.out.println(a);
-		a.primsMST();
+		a.primsMST(fOutput);
 		System.out.println();
 		int graph[][] = new int[][] { { 0, 2, 0, 6, 0 }, { 2, 0, 3, 8, 5 }, { 0, 3, 0, 0, 7 }, { 6, 8, 0, 0, 9 }, { 0, 5, 7, 9, 0 } };
 		adjMatrix b = new adjMatrix(graph);
 		System.out.println(b);
-		b.primsMST();
+		b.primsMST(fOutput);
 	}
 };
