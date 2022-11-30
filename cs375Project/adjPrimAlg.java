@@ -31,7 +31,6 @@ public class adjPrimAlg {
                     iProblemtrack++;
                     // If first character is a digit and array is only length 1, we know a new problem is being sent in
                     iNumNodes = sLineTrack.charAt(0);
-                    System.out.println("here 1");
                     sLineTrack = fInput.readLine(); // Move to first given edge
                     sParseProblem = sLineTrack.split(" ");
                     mAdjMatrix = new adjMatrix(iNumNodes);
@@ -42,9 +41,9 @@ public class adjPrimAlg {
                     }
                     lAdjList = new adjList(minSpanningTree, iNumNodes);
                     while (!(sParseProblem.length == 1) && sLineTrack != null){
+                        sParseProblem = sLineTrack.split(" ");
                         mAdjMatrix.addEdge(Integer.parseInt(sParseProblem[0]), Integer.parseInt(sParseProblem[1]), Integer.parseInt(sParseProblem[2]));
                         eEdgesToAdd.add(new Edge(Integer.parseInt(sParseProblem[0]), Integer.parseInt(sParseProblem[1]), Integer.parseInt(sParseProblem[2])));
-                        System.out.println("here 2");
                         sLineTrack = fInput.readLine();
                     }
                     for(int i = 0; i < eEdgesToAdd.size(); i++){
@@ -54,9 +53,9 @@ public class adjPrimAlg {
                     fOutputWriter.write("Adjancency List: \n");
                     lAdjList.primsMST(fOutputWriter);
                     fOutputWriter.write("\nAdjacency Matrix: \n");
+                    mAdjMatrix.primsMST(fOutputWriter);
                     fOutputWriter.write("\n");
                 } else {
-                    System.out.println("here 3");
                     sLineTrack = fInput.readLine();
                 }
                 sParseProblem = null;

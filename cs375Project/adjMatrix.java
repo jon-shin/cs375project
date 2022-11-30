@@ -58,9 +58,11 @@ class adjMatrix{
 	 * creates a minimum spanning tree from this graph and prints it to console
 	 */
 	public void primsMST(FileWriter w) throws IOException {
+		double startTime = System.nanoTime();
 		int numE = 0; 							//count number of edges
 		boolean selected[] = new boolean[numV];	//keep track of selected vertices
 		selected[0] = true; 					//arbitrarily select first vertex
+		double endTime = 0;
 		
 		w.write("Prim's Algorithm using adjacency matrix representation:\n");
 		w.write("Edge : Weight\n");
@@ -82,11 +84,15 @@ class adjMatrix{
 					}
 				}
 			}
-			w.write(r + " - " + c + " : " + matrix[r][c] + "\n");
+			if ((r != 0) && (c != 0)){
+				w.write(r + " - " + c + " : " + matrix[r][c] + "\n");
+			}
 			selected[c] = true;	//update selected to include vertex c
 			numE++;
 		}
-		w.write("\n");
+		w.write("Total Computation Time: ");
+		endTime = System.nanoTime();
+		w.write(Double.toString((endTime-startTime)/1000000) + " milliseconds");
 	}
 	
 	//examples for creating a graph and running prims

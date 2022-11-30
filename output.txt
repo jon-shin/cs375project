@@ -3,7 +3,16 @@ Adjancency List:
 Prim's Algorithm using adjacency list representation:
 Edge : Weight
 0 - 1 : 4
-
-
+1 - 2 : 2
+2 - 4 : 2
+2 - 3 : 3
+4 - 5 : 3
+Total Computation Time: 11.418267 milliseconds
 Adjacency Matrix: 
-
+Prim's Algorithm using adjacency matrix representation:
+Edge : Weight
+1 - 2 : 2
+2 - 4 : 2
+2 - 3 : 3
+3 - 5 : 3
+Total Computation Time: 1.013323 milliseconds

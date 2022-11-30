@@ -30,6 +30,8 @@ public class adjList{
     }
 
     public void primsMST(FileWriter w) throws IOException{
+        double startTime = System.nanoTime();
+        double endTime = 0;
         w.write("Prim's Algorithm using adjacency list representation:\n");
 		w.write("Edge : Weight\n");
         PriorityQueue<Edge> pq = new PriorityQueue<Edge>(minWeight);
@@ -60,7 +62,9 @@ public class adjList{
         for(int i = 0; i < mst.size(); i++){
             w.write(mst.get(i).getSource() + " - " + mst.get(i).getDest() + " : " + mst.get(i).getWeight() + "\n");
         }
-        w.write("\n");
+        w.write("Total Computation Time: ");
+        endTime = System.nanoTime();
+        w.write(Double.toString((endTime-startTime)/1000000) + " milliseconds");
     }
 
     public static void main(String args[]) throws IOException{
