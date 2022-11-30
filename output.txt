@@ -1,0 +1,9 @@
+Problem 1
+Adjancency List: 
+Prim's Algorithm using adjacency list representation:
+Edge : Weight
+0 - 1 : 4
+
+
+Adjacency Matrix: 
+

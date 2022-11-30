@@ -1,5 +1,11 @@
 # cs375project
-This file is run by commandline by first compiling with the following:
+This file is run by commandline by completing the following steps:
+
+1. Use cd command to navigate into the cs375Project folder which is found in cs375project directory. 
+"cd cs375Project". 
+(Note difference in capital on the phrase "project", indicating different folders)
+
+2. Compile the code with the following:
 
 javac adjPrimAlg.java adjList.java adjMatrix.java Edge.java
 
@@ -7,9 +13,11 @@ OR
 
 javac *.java
 
-THEN running with the following:
+3. Then backtrack to the outside directory via "cd .." 
 
-java adjPrimAlg input.txt
+4. Run the program with the following:
+
+java cs375Project.adjPrimAlg input.txt
 
 
 The input file should have the following format:
