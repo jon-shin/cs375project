@@ -50,9 +50,9 @@ public class adjPrimAlg {
                         lAdjList.addEdge(eEdgesToAdd.get(i).getSource(), eEdgesToAdd.get(i).getDest(), eEdgesToAdd.get(i).getWeight());
                     }
                     fOutputWriter.write("Problem " + iProblemtrack + "\n");
-                    fOutputWriter.write("Adjancency List: \n");
+                    fOutputWriter.write("\n");
                     lAdjList.primsMST(fOutputWriter);
-                    fOutputWriter.write("\nAdjacency Matrix: \n");
+                    fOutputWriter.write("\n\n");
                     mAdjMatrix.primsMST(fOutputWriter);
                     fOutputWriter.write("\n");
                 } else {
