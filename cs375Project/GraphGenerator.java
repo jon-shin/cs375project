@@ -40,21 +40,26 @@ public class GraphGenerator {
 		
 		List<Integer> init_mst = new ArrayList<Integer>(); //create list of all already connected vertices-- initialize with random vertex
 		
+		//Add random vertex to mst to serve as initial vertex
 		int posUnconnected = random.nextInt(unconnected.size()-1);
 		int v_connect = unconnected.remove(posUnconnected);
 		init_mst.add(v_connect);
 		
+		//Begin connecting all vertices to the mst
 		while(unconnected.size() > 0) {
+			//Find a random connection point in the partial mst
 			int posMST;
 			if(init_mst.size() == 1) { posMST = 0; }
 			else{ posMST = random.nextInt(init_mst.size()-1); }
 			int v_mst = init_mst.get(posMST);
 			
+			//Find a random unconnected vertex to add
 			if( unconnected.size() == 1) { posUnconnected = 0; }
 			else{ posUnconnected = random.nextInt(unconnected.size()-1); }
 			v_connect = unconnected.remove(posUnconnected);
 			init_mst.add(v_connect);
 			
+			//Generate random weight and add new edge to output file
 			int weight = random.nextInt(MAX_WEIGHT - 1) + 1;
 			String e = v_mst + " " + v_connect;
 			String e2 = v_connect + " " + v_mst;
@@ -64,21 +69,7 @@ public class GraphGenerator {
 			fOutput.write(v_mst + " " + v_connect + " " + weight + "\n");
 		}
 		
-//		init_mst.add(connect.remove(random.nextInt(connect.size()-1)));
-//		while(connect.size() != 0) {
-//			int v2 = init_mst.get(random.nextInt(init_mst.size()));
-//			int v1 = connect.remove(random.nextInt(connect.size()));
-//			while(v1 != v2 && connect.size() > 0) {
-//				v1 = connect.remove(random.nextInt(connect.size()));
-//			}
-//			int weight = random.nextInt(MAX_WEIGHT-1) + 1;
-//			String e = v1 + " " + v2;
-//			String e2 = v2 + " " + v1;
-//			edges.add(e);
-//			edges.add(e2);
-//			count++;
-//			fOutput.write(v1 + " " + v2 + " " + weight + "\n");
-//		}
+		//If MST contains less edges than the randomly generated numEdges, add more random edges
 		while(count < numE) {
 			int v1 = random.nextInt(numV);
 			int v2 = random.nextInt(numV);
@@ -104,10 +95,9 @@ public class GraphGenerator {
 	public static void main(String[] args) throws IOException{
 		GraphGenerator g = new GraphGenerator();
 		
-		//g.generateGraph("gOutput.txt", 5, 10, false);
-		//g.generateGraph("gOutputSparse.txt", 5, 10, true);
-		g.generateGraph("gOutputBigSparse.txt", 20, 20, true);
-		
+		//g.generateGraph("gOutputBigSparse.txt", 20, 20, true);
 		//g.generateGraph("gOutputSmallSparse.txt", 10, 10, true);
+		
+		g.generateGraph("gOutputBigDense.txt", 100, 150, false);
 	}
 }
