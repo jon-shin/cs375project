@@ -30,7 +30,8 @@ public class adjPrimAlg {
                 if (Character.isDigit(sParseProblem[0].charAt(0)) & sParseProblem.length == 1){
                     iProblemtrack++;
                     // If first character is a digit and array is only length 1, we know a new problem is being sent in
-                    iNumNodes = sLineTrack.charAt(0);
+                    sParseProblem = sLineTrack.split(" ");
+                    iNumNodes = Integer.parseInt(sParseProblem[0]);
                     sLineTrack = fInput.readLine(); // Move to first given edge
                     sParseProblem = sLineTrack.split(" ");
                     mAdjMatrix = new adjMatrix(iNumNodes);

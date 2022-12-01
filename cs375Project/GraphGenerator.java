@@ -106,8 +106,8 @@ public class GraphGenerator {
 		
 		//g.generateGraph("gOutput.txt", 5, 10, false);
 		//g.generateGraph("gOutputSparse.txt", 5, 10, true);
-		//g.generateGraph("gOutputBigSparse.txt", 20, 40, true);
+		g.generateGraph("gOutputBigSparse.txt", 20, 20, true);
 		
-		g.generateGraph("gOutputSmallSparse.txt", 10, 10, true);
+		//g.generateGraph("gOutputSmallSparse.txt", 10, 10, true);
 	}
 }
