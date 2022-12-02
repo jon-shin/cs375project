@@ -1,4 +1,4 @@
-package cs375Project;
+//package cs375Project;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -55,19 +55,19 @@ class adjMatrix{
 	
 	/*
 	 * void primsMST
-	 * creates a minimum spanning tree from this graph and prints it to console
+	 * creates a minimum spanning tree from this graph and outputs to FileWriter w
 	 */
 	public void primsMST(FileWriter w) throws IOException {
 		double startTime = System.nanoTime();
 		int numE = 0; 							//count number of edges
-		boolean selected[] = new boolean[numV];	//keep track of selected vertices
+		boolean selected[] = new boolean[numV];	//keep track of vertices already in the mst
 		selected[0] = true; 					//arbitrarily select first vertex
 		double endTime = 0;
 		
 		w.write("Prim's Algorithm using adjacency matrix representation:\n");
 		w.write("Edge : Weight\n");
 		
-		while(numE < numV-1) {
+		while(numE < numV-1) { //Loop through max number of edges
 			int min = Integer.MAX_VALUE;
 			int r = 0, c = 0;	//keep track of row/col
 			
@@ -75,7 +75,7 @@ class adjMatrix{
 				if(selected[i]) {	//only continue if vertex i is in the mst already
 					for(int j = 0; j < numV; j++) {
 						if(!selected[j] && matrix[i][j] != 0) { //only continue if vertex j is not already in mst and the edge exists
-							if(min > matrix[i][j]) {	//check min weight
+							if(min > matrix[i][j]) {	//check min weight and update accordingly
 								min = matrix[i][j];
 								r = i;
 								c = j;
@@ -84,6 +84,7 @@ class adjMatrix{
 					}
 				}
 			}
+			//Add min edge to the mst if found
 			if ((r != 0) && (c != 0)){
 				w.write(r + " - " + c + " : " + matrix[r][c] + "\n");
 			}

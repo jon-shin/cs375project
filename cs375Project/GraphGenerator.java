@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class GraphGenerator {
-	private final int MAX_WEIGHT = 10;
+	private final int MAX_WEIGHT = 10; //Arbitrary choice for maximum edge weight
 	private Random random;
 	
 	public GraphGenerator() {
@@ -23,41 +23,42 @@ public class GraphGenerator {
 	public void generateGraph(String fileName, int minV, int maxV, boolean sparse) throws IOException{
 		FileWriter fOutput = new FileWriter(fileName);
 		
-		int numV;
-		if(minV == maxV) { numV = minV; }
-		else{ numV = random.nextInt(maxV - minV) + minV; }
+		//Randomly choose |V| between minV and maxV
+		int numV = minV == maxV ? minV : random.nextInt(maxV - minV) + minV;
+		
+		//Calculate density in the range 0 - 1. 0 <= density <= 0.5 if sparse. 0.75 <= density <= 1 if dense
 		double density = sparse ? random.nextDouble() * 0.5 : (random.nextDouble() * 0.25 + 0.75);
 		int numE = (int)(density / 2.0 * numV * (numV - 1));
 		
 		fOutput.write(numV + "\n");
 		
 		int count = 0;
-		Set<String> edges = new HashSet<String>();
+		Set<String> edges = new HashSet<String>();	//create set of already included edges to prevent generating same edge twice
 		List<Integer> unconnected = new ArrayList<Integer>(); //create list of all vertices-- need to be connected
 		for(int i = 0; i < numV; i++) {
 			unconnected.add(i);
 		}
 		
-		List<Integer> init_mst = new ArrayList<Integer>(); //create list of all already connected vertices-- initialize with random vertex
+		List<Integer> init_st = new ArrayList<Integer>(); //create list of all already connected vertices-- initialize with random vertex
 		
-		//Add random vertex to mst to serve as initial vertex
+		//Add random vertex to spanning tree to serve as initial vertex
 		int posUnconnected = random.nextInt(unconnected.size()-1);
 		int v_connect = unconnected.remove(posUnconnected);
-		init_mst.add(v_connect);
+		init_st.add(v_connect);
 		
-		//Begin connecting all vertices to the mst
+		//Begin connecting all vertices to the spanning tree
 		while(unconnected.size() > 0) {
-			//Find a random connection point in the partial mst
+			//Find a random connection point in the partial spanning tree
 			int posMST;
-			if(init_mst.size() == 1) { posMST = 0; }
-			else{ posMST = random.nextInt(init_mst.size()-1); }
-			int v_mst = init_mst.get(posMST);
+			if(init_st.size() == 1) { posMST = 0; }
+			else{ posMST = random.nextInt(init_st.size()-1); }
+			int v_mst = init_st.get(posMST);
 			
 			//Find a random unconnected vertex to add
 			if( unconnected.size() == 1) { posUnconnected = 0; }
 			else{ posUnconnected = random.nextInt(unconnected.size()-1); }
 			v_connect = unconnected.remove(posUnconnected);
-			init_mst.add(v_connect);
+			init_st.add(v_connect);
 			
 			//Generate random weight and add new edge to output file
 			int weight = random.nextInt(MAX_WEIGHT - 1) + 1;
@@ -71,11 +72,13 @@ public class GraphGenerator {
 		
 		//If MST contains less edges than the randomly generated numEdges, add more random edges
 		while(count < numE) {
+			//Get random vertices v1 and v2
 			int v1 = random.nextInt(numV);
 			int v2 = random.nextInt(numV);
 			while(v1 == v2) {
-				v2 = random.nextInt(numV);
+				v2 = random.nextInt(numV);	//Don't want self edge, continue to generate
 			}
+			//Check possible edge combinations in set edges
 			String e = v1 + " " + v2;
 			String e2 = v2 + " " + v1;
 			if(!edges.contains(e) && !edges.contains(e2)) {
@@ -98,6 +101,6 @@ public class GraphGenerator {
 		//g.generateGraph("gOutputBigSparse.txt", 20, 20, true);
 		//g.generateGraph("gOutputSmallSparse.txt", 10, 10, true);
 		
-		g.generateGraph("gOutputBigDense.txt", 100, 150, false);
+		g.generateGraph("gOutputBigDense.txt", 100, 100, false);
 	}
 }
