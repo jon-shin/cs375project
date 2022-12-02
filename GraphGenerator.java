@@ -98,9 +98,14 @@ public class GraphGenerator {
 	public static void main(String[] args) throws IOException{
 		GraphGenerator g = new GraphGenerator();
 		
-		//g.generateGraph("gOutputBigSparse.txt", 20, 20, true);
-		//g.generateGraph("gOutputSmallSparse.txt", 10, 10, true);
-		
-		g.generateGraph("gOutputBigDense.txt", 100, 100, false);
+		//g.generateGraph("gInputSmallSparse1.txt", 0, 10, true);
+		//g.generateGraph("gInputSmallSparse2.txt", 10, 20, true);
+		//g.generateGraph("gInputSmallDense1.txt", 5, 10, false);
+		//g.generateGraph("gInputSmallDense2.txt", 10, 20, false);
+		//g.generateGraph("gInputBigSparse1.txt", 100, 150, true);
+		//g.generateGraph("gInputBigSparse2.txt", 150, 200, true);
+		//g.generateGraph("gInputBigDense1.txt", 100, 150, false);
+		//g.generateGraph("gInputBigDense2.txt", 190, 200, false);
+		//g.generateGraph("gInputSuperLargeDense.txt", 1000, 1000, false);
 	}
 }

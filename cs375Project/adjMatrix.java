@@ -85,7 +85,7 @@ class adjMatrix{
 				}
 			}
 			//Add min edge to the mst if found
-			if ((r != 0) && (c != 0)){
+			if (!(r == 0 && c == 0)){
 				w.write(r + " - " + c + " : " + matrix[r][c] + "\n");
 			}
 			selected[c] = true;	//update selected to include vertex c
